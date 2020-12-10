@@ -1,0 +1,184 @@
+package com.nyble.main;
+
+import java.io.*;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import com.nyble.api.ConsumersAPI;
+import com.nyble.api.messages.ConsumerInfoResponseAdapter;
+import com.nyble.managers.ProducerManager;
+import com.nyble.topics.Names;
+import com.nyble.util.DBUtil;
+import feign.Feign;
+import feign.gson.GsonDecoder;
+import feign.gson.GsonEncoder;
+import feign.httpclient.ApacheHttpClient;
+import feign.slf4j.Slf4jLogger;
+import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static com.nyble.main.AppSystem.*;
+
+public class App {
+
+    public static String KAFKA_CLUSTER_BOOTSTRAP_SERVERS = "10.100.1.17:9093";
+    public static Properties producerProperties = new Properties();
+    public static  ProducerManager producerManager;
+
+    static{
+        producerProperties.put("bootstrap.servers", App.KAFKA_CLUSTER_BOOTSTRAP_SERVERS);
+        producerProperties.put("acks", "all");
+        producerProperties.put("retries", 5);
+        producerProperties.put("batch.size", 16384);
+        producerProperties.put("linger.ms", 1);
+        producerProperties.put("buffer.memory", 33554432);
+        producerProperties.put("key.serializer", StringSerializer.class.getName());
+        producerProperties.put("value.serializer", StringSerializer.class.getName());
+
+        producerManager = ProducerManager.getInstance(producerProperties);
+        Runtime.getRuntime().addShutdownHook(new Thread(()->{
+            producerManager.getProducer().flush();
+            producerManager.getProducer().close();
+        }));
+    }
+
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+    final static Slf4jLogger feignLogger = new Slf4jLogger(App.class);
+
+
+
+
+    public static void main(String[] args){
+        final ConsumersAPI consumersAPI = Feign.builder()
+                .client(new ApacheHttpClient())
+                .encoder(new GsonEncoder())
+                .decoder(new GsonDecoder(Collections.singleton(new ConsumerInfoResponseAdapter())))
+                .logger(feignLogger).logLevel(feign.Logger.Level.FULL)
+                .target(ConsumersAPI.class, rmc.getProperty(BASE_URL));
+
+        if(args.length == 1){
+            File consumers = new File(args[0]);
+            logger.info("Run from file: {}", args[0]);
+            try {
+                runFromFile(consumersAPI, consumers);
+            } catch (IOException | NoSuchAlgorithmException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }else{
+            logger.info("Running at fixed rate, from 30 to 30 min");
+            final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+            final Runnable task = () -> {
+                try {
+                    getUpdatedConsumers(consumersAPI, Names.RMC_SYSTEM_ID);
+                    getUpdatedConsumers(consumersAPI, Names.RRP_SYSTEM_ID);
+                } catch (Exception e) {
+                    logger.error(e.getMessage(), e);
+                    logger.error("EXITING SERVICE...");
+                    System.exit(1);
+                }
+            };
+
+
+            long initialDelay = 0;
+            long constantDelay = 60*30;
+            /*
+             * scheduleAtFixedRate(Runnable command, long initialDelay, long delay, TimeUnit unit):
+             * Executes a periodic task after an initial delay, then repeat after every given period.
+             * If any execution of this task takes longer than its period, then subsequent executions may start late,
+             * but will not concurrently execute.
+             */
+            scheduler.scheduleAtFixedRate(task, initialDelay, constantDelay, TimeUnit.SECONDS);
+        }
+    }
+
+    public static void runFromFile(ConsumersAPI consumersAPI, File consumers)
+            throws IOException, NoSuchAlgorithmException {
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(consumers))){
+            String line;
+            while((line = bufferedReader.readLine()) != null){
+                String[] cells = line.split(",");
+                int systemId = Integer.parseInt(cells[0]);
+                int consumerId = Integer.parseInt(cells[1]);
+                ConsumerController cc = new ConsumerController(systemId, consumerId);
+                cc.updateConsumer(consumersAPI);
+            }
+        }
+    }
+
+    public static void getUpdatedConsumers(ConsumersAPI consumersAPI, int systemId)
+            throws SQLException, NoSuchAlgorithmException {
+        String lastRunAt = getLastRunTimestamp(systemId);
+        String newLastRun = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        final String query = String.format("select id from consumer " +
+                "where date_update > '%s' and date_update<=now()", lastRunAt);
+        Properties system;
+        if(systemId == Names.RMC_SYSTEM_ID){system = rmc;}
+        else if(systemId == Names.RRP_SYSTEM_ID){system = rrp;}
+        else{ throw new RuntimeException("Unknown system");}
+
+        try(Connection conn = DBUtil.getInstance().getConnection(system.getProperty(SOURCE_JDBC_CONN_NAME));
+            Statement st = conn.createStatement()){
+            st.setFetchSize(1000);
+
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                int consumerId = rs.getInt(1);
+                ConsumerController cc = new ConsumerController(systemId, consumerId);
+                cc.updateConsumer(consumersAPI);
+            }
+        }
+        updateLastRunTimestamp(systemId, newLastRun);
+    }
+
+    private static void updateLastRunTimestamp(int systemId, String newLastRun) throws SQLException {
+        String key;
+        if(systemId == Names.RMC_SYSTEM_ID){
+            key = "POLL_CONSUMER_ATTRS_LAST_RUN_RMC";
+        }else if(systemId == Names.RRP_SYSTEM_ID){
+            key = "POLL_CONSUMER_ATTRS_LAST_RUN_RRP";
+        }else{
+            throw new RuntimeException("Unknown system id");
+        }
+        final String query = String.format("update config_parameters set value = '%s' " +
+                "where key = '%s'", newLastRun, key);
+        try(Connection conn = DBUtil.getInstance().getConnection("datawarehouse");
+            Statement st = conn.createStatement()){
+
+            st.executeUpdate(query);
+        }
+    }
+
+    private static String getLastRunTimestamp(int systemId) throws SQLException {
+        String key;
+        if(systemId == Names.RMC_SYSTEM_ID){
+            key = "POLL_CONSUMER_ATTRS_LAST_RUN_RMC";
+        }else if(systemId == Names.RRP_SYSTEM_ID){
+            key = "POLL_CONSUMER_ATTRS_LAST_RUN_RRP";
+        }else{
+            throw new RuntimeException("Unknown system id");
+        }
+        final String query = String.format("select value from config_parameters where key = '%s'",
+                key);
+        try(Connection conn = DBUtil.getInstance().getConnection("datawarehouse");
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query)){
+
+            if(rs.next()){
+                return rs.getString(1);
+            }else{
+                throw new RuntimeException("No last run time for systemId "+systemId);
+            }
+        }
+    }
+
+
+}

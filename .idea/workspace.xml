@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3e629441-ca16-4c1f-aeea-3cfed49295fd" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1g02X7iQpEgKQ9cSQmFpvRYxbqJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../TestFastScripts" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/nyble" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.nyble.main" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Maven.package">
+    <configuration name="App" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.nyble.main.App" />
+      <module name="LoadConsumerUniqueAttributes" />
+      <option name="PROGRAM_PARAMETERS" value="/tmp/consumers.csv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nyble.api.messages.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConsumerControllerTester.test_getConsumer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LoadConsumerUniqueAttributes" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ConsumerControllerTester" />
+      <option name="METHOD_NAME" value="test_getConsumer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConsumerFromDBTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="LoadConsumerUniqueAttributes" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ConsumerFromDBTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConsumerFromDBTest.test2_getPhone" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LoadConsumerUniqueAttributes" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ConsumerFromDBTest" />
+      <option name="METHOD_NAME" value="test2_getPhone" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConsumerFromDBTest.test3_getFullName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LoadConsumerUniqueAttributes" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ConsumerFromDBTest" />
+      <option name="METHOD_NAME" value="test3_getFullName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JsonTest.test_jsonArr" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LoadConsumerUniqueAttributes" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="JsonTest" />
+      <option name="METHOD_NAME" value="test_jsonArr" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JsonTest.test_jsonObj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LoadConsumerUniqueAttributes" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="JsonTest" />
+      <option name="METHOD_NAME" value="test_jsonObj" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="package" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="JUnit.ConsumerFromDBTest" />
+      <item itemvalue="JUnit.ConsumerFromDBTest.test2_getPhone" />
+      <item itemvalue="JUnit.ConsumerFromDBTest.test3_getFullName" />
+      <item itemvalue="JUnit.ConsumerControllerTester.test_getConsumer" />
+      <item itemvalue="JUnit.JsonTest.test_jsonObj" />
+      <item itemvalue="JUnit.JsonTest.test_jsonArr" />
+      <item itemvalue="Maven.package" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.JsonTest.test_jsonArr" />
+        <item itemvalue="JUnit.JsonTest.test_jsonObj" />
+        <item itemvalue="JUnit.ConsumerControllerTester.test_getConsumer" />
+        <item itemvalue="JUnit.ConsumerFromDBTest.test3_getFullName" />
+        <item itemvalue="JUnit.ConsumerFromDBTest.test2_getPhone" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3e629441-ca16-4c1f-aeea-3cfed49295fd" name="Default Changelist" comment="" />
+      <created>1597237225143</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597237225143</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="596" y="190" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606903006597">
+      <screen x="0" y="30" width="1680" height="1050" />
+    </state>
+    <state x="596" y="190" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606903006597" />
+    <state x="2421" y="250" width="374" height="626" key="#com.intellij.ide.util.MemberChooser" timestamp="1606576721548">
+      <screen x="1680" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2421" y="250" width="374" height="562" key="#com.intellij.ide.util.MemberChooser/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606576721548" />
+    <state x="1523" y="271" width="374" height="626" key="#com.intellij.ide.util.MemberChooser/67.27.3773.1053@67.27.3773.1053" timestamp="1601655601790" />
+    <state x="2355" y="244" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606141792259">
+      <screen x="1680" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2355" y="244" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606141792259" />
+    <state x="2363" y="240" key="#xdebugger.evaluate" timestamp="1606143684068">
+      <screen x="1680" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2363" y="240" key="#xdebugger.evaluate/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606143684068" />
+    <state width="575" height="480" key="DebuggerActiveHint" timestamp="1606217239451">
+      <screen x="1680" y="0" width="1920" height="1080" />
+    </state>
+    <state width="575" height="480" key="DebuggerActiveHint/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606217239451" />
+    <state width="1130" height="469" key="DebuggerActiveHint/67.27.3773.1053@67.27.3773.1053" timestamp="1601726843495" />
+    <state x="2633" y="335" width="424" height="484" key="FileChooserDialogImpl" timestamp="1606303101180">
+      <screen x="1680" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2633" y="335" width="424" height="484" key="FileChooserDialogImpl/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606303101180" />
+    <state width="1406" height="198" key="GridCell.Tab.0.bottom" timestamp="1607589641836">
+      <screen x="67" y="27" width="3773" height="1053" />
+    </state>
+    <state width="1406" height="263" key="GridCell.Tab.0.bottom/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606903053363" />
+    <state width="1807" height="198" key="GridCell.Tab.0.bottom/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606579839645" />
+    <state width="1406" height="198" key="GridCell.Tab.0.bottom/67.27.3773.1053@67.27.3773.1053" timestamp="1607589641836" />
+    <state width="1406" height="198" key="GridCell.Tab.0.center" timestamp="1607589641831">
+      <screen x="67" y="27" width="3773" height="1053" />
+    </state>
+    <state width="1406" height="263" key="GridCell.Tab.0.center/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606903053363" />
+    <state width="1807" height="198" key="GridCell.Tab.0.center/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606579839645" />
+    <state width="1406" height="198" key="GridCell.Tab.0.center/67.27.3773.1053@67.27.3773.1053" timestamp="1607589641831" />
+    <state width="1406" height="198" key="GridCell.Tab.0.left" timestamp="1607589641830">
+      <screen x="67" y="27" width="3773" height="1053" />
+    </state>
+    <state width="1406" height="263" key="GridCell.Tab.0.left/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606903053363" />
+    <state width="1807" height="198" key="GridCell.Tab.0.left/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606579839645" />
+    <state width="1406" height="198" key="GridCell.Tab.0.left/67.27.3773.1053@67.27.3773.1053" timestamp="1607589641830" />
+    <state width="1406" height="198" key="GridCell.Tab.0.right" timestamp="1607589641834">
+      <screen x="67" y="27" width="3773" height="1053" />
+    </state>
+    <state width="1406" height="263" key="GridCell.Tab.0.right/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606903053363" />
+    <state width="1807" height="198" key="GridCell.Tab.0.right/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606579839645" />
+    <state width="1406" height="198" key="GridCell.Tab.0.right/67.27.3773.1053@67.27.3773.1053" timestamp="1607589641834" />
+    <state width="1406" height="263" key="GridCell.Tab.1.bottom" timestamp="1606903020279">
+      <screen x="0" y="30" width="1680" height="1050" />
+    </state>
+    <state width="1406" height="263" key="GridCell.Tab.1.bottom/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606903020279" />
+    <state width="1406" height="263" key="GridCell.Tab.1.bottom/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606231276363" />
+    <state width="3727" height="331" key="GridCell.Tab.1.bottom/67.27.3773.1053@67.27.3773.1053" timestamp="1601731620094" />
+    <state width="1406" height="263" key="GridCell.Tab.1.center" timestamp="1606903020279">
+      <screen x="0" y="30" width="1680" height="1050" />
+    </state>
+    <state width="1406" height="263" key="GridCell.Tab.1.center/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606903020279" />
+    <state width="1406" height="263" key="GridCell.Tab.1.center/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606231276363" />
+    <state width="3727" height="331" key="GridCell.Tab.1.center/67.27.3773.1053@67.27.3773.1053" timestamp="1601731620092" />
+    <state width="1406" height="263" key="GridCell.Tab.1.left" timestamp="1606903020279">
+      <screen x="0" y="30" width="1680" height="1050" />
+    </state>
+    <state width="1406" height="263" key="GridCell.Tab.1.left/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606903020279" />
+    <state width="1406" height="263" key="GridCell.Tab.1.left/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606231276363" />
+    <state width="3727" height="331" key="GridCell.Tab.1.left/67.27.3773.1053@67.27.3773.1053" timestamp="1601731620091" />
+    <state width="1406" height="263" key="GridCell.Tab.1.right" timestamp="1606903020279">
+      <screen x="0" y="30" width="1680" height="1050" />
+    </state>
+    <state width="1406" height="263" key="GridCell.Tab.1.right/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606903020279" />
+    <state width="1406" height="263" key="GridCell.Tab.1.right/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606231276363" />
+    <state width="3727" height="331" key="GridCell.Tab.1.right/67.27.3773.1053@67.27.3773.1053" timestamp="1601731620093" />
+    <state x="2155" y="153" width="924" height="684" key="Maven.ArtifactSearchDialog" timestamp="1606140883482">
+      <screen x="1680" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2155" y="153" width="924" height="684" key="Maven.ArtifactSearchDialog/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606140883482" />
+    <state x="850" y="400" key="com.intellij.ide.util.TipDialog" timestamp="1599036658942">
+      <screen x="67" y="27" width="3773" height="1053" />
+    </state>
+    <state x="850" y="400" key="com.intellij.ide.util.TipDialog/67.27.3773.1053@67.27.3773.1053" timestamp="1599036658942" />
+    <state x="558" y="305" width="710" height="538" key="find.popup" timestamp="1606397909838">
+      <screen x="0" y="30" width="1680" height="1050" />
+    </state>
+    <state x="2022" y="251" width="1332" height="538" key="find.popup/0.27.3600.1053@0.27.3600.1053" timestamp="1605817894355" />
+    <state x="558" y="305" width="710" height="538" key="find.popup/1680.0.1920.1080/0.30.1680.1050@0.30.1680.1050" timestamp="1606397909838" />
+    <state x="2318" y="283" width="710" height="538" key="find.popup/1680.0.1920.1080/0.30.1680.1050@1680.0.1920.1080" timestamp="1606312616641" />
+    <state x="1321" y="303" width="1396" height="538" key="find.popup/67.27.3773.1053@67.27.3773.1053" timestamp="1601811673527" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/ConsumerControllerTester.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
