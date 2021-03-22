@@ -27,7 +27,7 @@
         </Gelf>
     </Appenders>
     <Loggers>
-        <Logger name="com.nyble" level="all" additivity="false">
+        <Logger name="com.nyble" level="info" additivity="false">
             <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="graylog"/>
         </Logger>

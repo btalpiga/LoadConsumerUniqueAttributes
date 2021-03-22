@@ -150,17 +150,21 @@ public class App {
         else if(systemId == Names.RRP_SYSTEM_ID){system = rrp;}
         else{ throw new RuntimeException("Unknown system");}
 
+        logger.info("Start ingesting consumers on systemId {}", systemId);
+        int consumers = 0;
         try(Connection conn = DBUtil.getInstance().getConnection(system.getProperty(SOURCE_JDBC_CONN_NAME));
             Statement st = conn.createStatement()){
             st.setFetchSize(1000);
 
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
+                consumers++;
                 int consumerId = rs.getInt(1);
                 ConsumerController cc = new ConsumerController(systemId, consumerId);
                 cc.updateConsumer(consumersAPI);
             }
         }
+        logger.info("Ingested {} consumers on systemId {}", consumers, systemId);
         updateLastRunTimestamp(systemId, newLastRun);
     }
 
