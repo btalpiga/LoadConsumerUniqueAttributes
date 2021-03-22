@@ -1,5 +1,6 @@
 package com.nyble.main;
 
+import com.nyble.App;
 import com.nyble.api.ConsumersAPI;
 import com.nyble.api.messages.ConsumerInfoResponse;
 import com.nyble.api.messages.GetConsumerInfoRequest;
@@ -36,15 +37,15 @@ public class ConsumerController {
 
     public void updateConsumer(ConsumersAPI consumersAPI) throws NoSuchAlgorithmException {
         Map<String, String> consumerAttributes = getConsumer(consumersAPI);
-            String now = new Date().getTime() + "";
-            for (String att : attributeToColumnMap) {
-                String value = new StringConverter(consumerAttributes.get(att)).coalesce("").get();
-                ConsumerAttributesKey cak = new ConsumerAttributesKey(systemId, consumerId);
-                ConsumerAttributesValue cav = new ConsumerAttributesValue(systemId + "", consumerId + "", att,
-                        value, now, now);
-                App.producerManager.getProducer().send(new ProducerRecord<>(Names.CONSUMER_ATTRIBUTES_TOPIC,
-                        cak.toJson(), cav.toJson()));
-            }
+        String now = new Date().getTime() + "";
+        for (String att : attributeToColumnMap) {
+            String value = new StringConverter(consumerAttributes.get(att)).coalesce("").get();
+            ConsumerAttributesKey cak = new ConsumerAttributesKey(systemId, consumerId);
+            ConsumerAttributesValue cav = new ConsumerAttributesValue(systemId + "", consumerId + "", att,
+                    value, now, now);
+            App.producerManager.getProducer().send(new ProducerRecord<>(Names.CONSUMER_ATTRIBUTES_TOPIC,
+                    cak.toJson(), cav.toJson()));
+        }
     }
 
     public Map<String, String> getConsumer(ConsumersAPI consumersAPI)

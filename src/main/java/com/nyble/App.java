@@ -1,4 +1,4 @@
-package com.nyble.main;
+package com.nyble;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.nyble.api.ConsumersAPI;
 import com.nyble.api.messages.ConsumerInfoResponseAdapter;
+import com.nyble.main.ConsumerController;
 import com.nyble.managers.ProducerManager;
 import com.nyble.topics.Names;
 import com.nyble.util.DBUtil;
@@ -25,16 +26,20 @@ import feign.slf4j.Slf4jLogger;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import static com.nyble.main.AppSystem.*;
 
+@SpringBootApplication
 public class App {
 
     public static String KAFKA_CLUSTER_BOOTSTRAP_SERVERS = "10.100.1.17:9093";
     public static Properties producerProperties = new Properties();
     public static  ProducerManager producerManager;
 
-    static{
+    static void init(){
         producerProperties.put("bootstrap.servers", App.KAFKA_CLUSTER_BOOTSTRAP_SERVERS);
         producerProperties.put("acks", "all");
         producerProperties.put("retries", 5);
@@ -55,14 +60,34 @@ public class App {
     final static Slf4jLogger feignLogger = new Slf4jLogger(App.class);
 
 
-
+//    public static void main(String[] args){
+//        final ConsumersAPI consumersAPI = Feign.builder()
+//                .client(new ApacheHttpClient())
+//                .encoder(new GsonEncoder())
+//                .decoder(new GsonDecoder(Collections.singleton(new ConsumerInfoResponseAdapter())))
+//                .logger(feignLogger).logLevel(feign.Logger.Level.FULL)
+//                .target(ConsumersAPI.class, rmc.getProperty(BASE_URL));
+//
+//        GetConsumerInfoRequest request = new GetConsumerInfoRequest("12170339",
+//                rmc.getProperty(CRM_KEY), rmc.getProperty(EXTERNAL_SYSTEM_ID));
+//        ConsumerInfoResponse rsp;
+//        try{
+//            rsp = consumersAPI.getConsumers(new URI(rmc.getProperty(BASE_URL)), request);
+//            System.out.println(rsp.consumers[0].getGdprApproval());
+//        }catch(Exception e){
+//            logger.error("API ERROR: req = {} \nrsp = {}", request.toString(), e.getMessage());
+//            throw new RuntimeException("API ERROR");
+//        }
+//    }
 
     public static void main(String[] args){
+
+        init();
         final ConsumersAPI consumersAPI = Feign.builder()
                 .client(new ApacheHttpClient())
                 .encoder(new GsonEncoder())
                 .decoder(new GsonDecoder(Collections.singleton(new ConsumerInfoResponseAdapter())))
-                .logger(feignLogger).logLevel(feign.Logger.Level.FULL)
+                .logger(feignLogger).logLevel(feign.Logger.Level.BASIC)
                 .target(ConsumersAPI.class, rmc.getProperty(BASE_URL));
 
         if(args.length == 1){
@@ -74,6 +99,7 @@ public class App {
                 logger.error(e.getMessage(), e);
             }
         }else{
+            ConfigurableApplicationContext ctx = SpringApplication.run(App.class, args);
             logger.info("Running at fixed rate, from 30 to 30 min");
             final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
             final Runnable task = () -> {
@@ -86,7 +112,6 @@ public class App {
                     System.exit(1);
                 }
             };
-
 
             long initialDelay = 0;
             long constantDelay = 60*30;

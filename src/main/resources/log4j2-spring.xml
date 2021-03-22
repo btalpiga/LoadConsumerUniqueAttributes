@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG" >
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="LogToFile" fileName="logs/LoadConsumerUniqueAttributes.log" filePattern="logs/LoadConsumerUniqueAttributes.%i.log">
+            <PatternLayout>
+                <Pattern>%t %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+        <Gelf name="graylog" host="tcp:10.100.1.17" port="12201" extractStackTrace="true" additionalFieldTypes="application=String,logger=String">
+            <!--            <PatternLayout> <Pattern>%t %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern> </PatternLayout>-->
+            <Field name="thread" pattern="%t"/>
+            <Field name="timestamp" pattern="%d{dd MMM yyyy HH:mm:ss,SSS}" />
+            <Field name="simpleClassName" pattern="%C{1}" />
+            <Field name="lineNumber" pattern="%L" />
+            <Field name="className" pattern="%C" />
+            <Field name="server" pattern="%host" />
+
+            <Field name="application" literal="LoadConsumerUniqueAttributes"/>
+            <Field name="logger" literal="log4j2"/>
+        </Gelf>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.nyble" level="all" additivity="false">
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="graylog"/>
+        </Logger>
+        <Logger name="org.springframework.boot" level="warn" additivity="false">
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="graylog"/>
+        </Logger>
+        <Root level="warn">
+            <AppenderRef ref="LogToFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
