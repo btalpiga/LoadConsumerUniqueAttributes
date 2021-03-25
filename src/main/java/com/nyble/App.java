@@ -50,9 +50,21 @@ public class App {
         producerProperties.put("value.serializer", StringSerializer.class.getName());
 
         producerManager = ProducerManager.getInstance(producerProperties);
+    }
+
+    static void cleanResources(ConfigurableApplicationContext ctx,  ScheduledExecutorService scheduler){
         Runtime.getRuntime().addShutdownHook(new Thread(()->{
             producerManager.getProducer().flush();
             producerManager.getProducer().close();
+            if(ctx.isActive()){
+                ctx.close();
+            }
+            scheduler.shutdown();
+            try {
+                scheduler.awaitTermination(30, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }));
     }
 
@@ -113,15 +125,16 @@ public class App {
                 }
             };
 
-            long initialDelay = 0;
-            long constantDelay = 60*30;
             /*
              * scheduleAtFixedRate(Runnable command, long initialDelay, long delay, TimeUnit unit):
              * Executes a periodic task after an initial delay, then repeat after every given period.
              * If any execution of this task takes longer than its period, then subsequent executions may start late,
              * but will not concurrently execute.
              */
-            scheduler.scheduleAtFixedRate(task, initialDelay, constantDelay, TimeUnit.SECONDS);
+            long initialDelay = 0;
+            long constantDelay = 30;
+            scheduler.scheduleAtFixedRate(task, initialDelay, constantDelay, TimeUnit.MINUTES);
+            cleanResources(ctx, scheduler);
         }
     }
 
