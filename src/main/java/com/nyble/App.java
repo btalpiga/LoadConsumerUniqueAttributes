@@ -117,11 +117,14 @@ public class App {
             final Runnable task = () -> {
                 try {
                     getUpdatedConsumers(consumersAPI, Names.RMC_SYSTEM_ID);
-                    getUpdatedConsumers(consumersAPI, Names.RRP_SYSTEM_ID);
                 } catch (Exception e) {
-                    logger.error(e.getMessage(), e);
-                    logger.error("EXITING SERVICE...");
-                    System.exit(1);
+                    logger.error("RMC updating error: "+e.getMessage(), e);
+                }
+
+                try{
+                    getUpdatedConsumers(consumersAPI, Names.RRP_SYSTEM_ID);
+                }catch (Exception e) {
+                    logger.error("RRP updating error: "+e.getMessage(), e);
                 }
             };
 
