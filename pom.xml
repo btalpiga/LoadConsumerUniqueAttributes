@@ -114,6 +114,18 @@
             <groupId>com.netflix.feign</groupId>
             <artifactId>feign-slf4j</artifactId>
             <version>7.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>biz.paluch.logging</groupId>
+            <artifactId>logstash-gelf</artifactId>
+            <version>1.12.0</version>
         </dependency>
 
     </dependencies>
@@ -140,32 +152,19 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.1</version>
-
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <finalName>LoadConsumerUniqueAttributes</finalName>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.nyble.App</mainClass>
-                        </manifest>
-                    </archive>
+                    <fork>true</fork>
+                    <mainClass>com.nyble.App</mainClass>
                 </configuration>
-
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
-
             </plugin>
         </plugins>
     </build>
