@@ -16,7 +16,7 @@ public class AppSystem {
 
     static{
         rmc.put(SOURCE_JDBC_CONN_NAME, "rmc");
-        rmc.put(BASE_URL, "http://10.100.1.7:81/api");
+        rmc.put(BASE_URL, "http://10.100.1.29:81/api");
         rmc.put(CRM_KEY, "khtnh5md");
         rmc.put(EXTERNAL_SYSTEM_ID, "555");
         rmc.put(INTERNAL_SYSTEM_ID, Names.RMC_SYSTEM_ID+"");
