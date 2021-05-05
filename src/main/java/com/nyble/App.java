@@ -160,7 +160,8 @@ public class App {
         String lastRunAt = getLastRunTimestamp(systemId);
         String newLastRun = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         final String query = String.format("select id from consumer " +
-                "where date_update > '%s' and date_update<=now()", lastRunAt);
+                "where date_update > '%s' and date_update<='%s'", lastRunAt, newLastRun);
+        logger.debug("RMC Query: {}", query);
         Properties system;
         if(systemId == Names.RMC_SYSTEM_ID){system = rmc;}
         else if(systemId == Names.RRP_SYSTEM_ID){system = rrp;}
