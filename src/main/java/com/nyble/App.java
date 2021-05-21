@@ -167,7 +167,7 @@ public class App {
         else if(systemId == Names.RRP_SYSTEM_ID){system = rrp;}
         else{ throw new RuntimeException("Unknown system");}
 
-        logger.info("Start ingesting consumers on systemId {}", systemId);
+        logger.info("Start ingesting consumers on systemId {}, query: {}", systemId, query);
         int consumers = 0;
         try(Connection conn = DBUtil.getInstance().getConnection(system.getProperty(SOURCE_JDBC_CONN_NAME));
             Statement st = conn.createStatement()){
