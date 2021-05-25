@@ -158,7 +158,9 @@ public class App {
     public static void getUpdatedConsumers(ConsumersAPI consumersAPI, int systemId)
             throws SQLException, NoSuchAlgorithmException {
         String lastRunAt = getLastRunTimestamp(systemId);
-        String newLastRun = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MINUTE, -10);
+        String newLastRun = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(cal.getTime());
         final String query = String.format("select id from consumer " +
                 "where date_update > '%s' and date_update<='%s'", lastRunAt, newLastRun);
         logger.debug("RMC Query: {}", query);

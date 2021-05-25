@@ -115,10 +115,10 @@ public class ConsumerController {
         rez.put("flags", calculateNewFlags(consumer));
         rez.put("declaredBrand", consumer.getDeclaredProduct());
         rez.put("fullName", ComparatorUtils.getFullName(firstName, lastName));
-        rez.put("location", hash(ComparatorUtils.getLocation(county, city, street)));
-        rez.put("phone", hash(phone));
-        rez.put("email", hash(email));
-        rez.put("birthDate", hash(birthDate));
+        rez.put("location", ComparatorUtils.getLocation(county, city, street));//hash(ComparatorUtils.getLocation(county, city, street)));
+        rez.put("phone", phone);//hash(phone));
+        rez.put("email", email);//hash(email));
+        rez.put("birthDate", birthDate);//hash(birthDate));
 
         rez.put("location_clear", ComparatorUtils.getLocation(county, city, street));
         rez.put("phone_clear", phone);
